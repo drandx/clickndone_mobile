@@ -46,20 +46,14 @@ namespace ClickNDone.iOS
 
 		}
 
-		public override async void ViewDidAppear (bool animated)
+		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
-			try {
-				var requesterUser = await userModel.GetUserAsync (ordersModel.RequestedOrder.UserId, UserType.CONSUMER);
-				ordersModel.RequestedOrder.User = requesterUser;
-				txtDate.Text = ordersModel.RequestedOrder.GetReservationDate();
-				txtUserName.Text = ordersModel.RequestedOrder.User.names;
-				txtUserLastName.Text = ordersModel.RequestedOrder.User.surnames;
-				txtState.Text = ordersModel.RequestedOrder.Status.ToString();
+			txtDate.Text = ordersModel.RequestedOrder.GetReservationDate();
+			txtUserName.Text = ordersModel.RequestedOrder.User.names;
+			txtUserLastName.Text = ordersModel.RequestedOrder.User.surnames;
+			txtState.Text = ordersModel.RequestedOrder.Status.ToString();
 
-			} catch (Exception exc) {
-				Console.WriteLine("Error relacionado con userModel.GetUserAsync " + exc.Message);
-			}
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -79,6 +73,8 @@ namespace ClickNDone.iOS
 			btnInitService.Enabled = 
 					indicator.Hidden = !userModel.IsBusy;
 		}
+
+
 
 
 	}

@@ -19,6 +19,7 @@ namespace ClickNDone.Core
 			try
 			{
 				Categories = await service.GetCategoriesAsync(settings.User.sessionToken, settings.DeviceToken);
+				SortCategoriesAsc();
 			}
 			finally {
 				IsBusy = false;
@@ -52,6 +53,27 @@ namespace ClickNDone.Core
 			return new Category ();
 		}
 
+		private void SortCategoriesAsc()
+		{
+			foreach(var catItem in Categories)
+			{
+				var subcategories = catItem.Subcategories;
+				var sortedSubcategories = from sc in subcategories
+				                          orderby sc.Name
+				                          select sc;
+
+				catItem.Subcategories = sortedSubcategories.ToList();
+			}
+
+		}
+
+		public class CaseInsensitiveComparer : IComparer<string> 
+		{ 
+			public int Compare(string x, string y) 
+			{ 
+				return string.Compare(x, y, StringComparison.OrdinalIgnoreCase); 
+			} 
+		}
 	}
 }
 

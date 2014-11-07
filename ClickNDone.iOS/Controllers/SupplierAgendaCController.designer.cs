@@ -16,18 +16,26 @@ namespace ClickNDone.iOS
 		MonoTouch.UIKit.UIActivityIndicatorView indicator { get; set; }
 
 		[Outlet]
+		MonoTouch.UIKit.UILabel lblAgendaServicios { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UIScrollView scrollerAgenda { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (indicator != null) {
+				indicator.Dispose ();
+				indicator = null;
+			}
+
 			if (scrollerAgenda != null) {
 				scrollerAgenda.Dispose ();
 				scrollerAgenda = null;
 			}
 
-			if (indicator != null) {
-				indicator.Dispose ();
-				indicator = null;
+			if (lblAgendaServicios != null) {
+				lblAgendaServicios.Dispose ();
+				lblAgendaServicios = null;
 			}
 		}
 	}

@@ -30,6 +30,12 @@ namespace ClickNDone.iOS
 		public async Task<bool> LoadMenuItems()
 		{
 			var scrollerSubviews = this.scrollerAgenda.Subviews;
+			if(userModel.UserType.Equals(UserType.CONSUMER))
+				lblAgendaServicios.Text = " Servicios Activos";
+			else
+				lblAgendaServicios.Text = " Agenda de Servicios";
+
+
 			foreach (UIView subView in scrollerSubviews) {
 				subView.RemoveFromSuperview ();
 			}
@@ -77,17 +83,23 @@ namespace ClickNDone.iOS
 			this.LoadLeftbarButton ();
 		}
 
-		private void handler(Object sender, EventArgs args)
+		private async void handler(Object sender, EventArgs args)
 		{
 			UIButton selectedOrder = (UIButton)sender;
 			ordersModel.RequestedOrder = ordersModel.SupplierAgenda.Where (a => a.Id == selectedOrder.Tag).First();
+			try {
+				var requesterUser = await userModel.GetUserAsync (ordersModel.RequestedOrder.UserId, UserType.CONSUMER);
+				ordersModel.RequestedOrder.User = requesterUser;
 
-			if (userModel.User.userType.Equals (UserType.SUPPLIER)) {
-				PerformSegue ("OnServiceDetail", this);
-			} else if (userModel.User.userType.Equals (UserType.CONSUMER)) {
-				PerformSegue ("OnServiceConsumerDetail", this);
+				if (userModel.User.userType.Equals (UserType.SUPPLIER)) {
+					PerformSegue ("OnServiceDetail", this);
+				} else if (userModel.User.userType.Equals (UserType.CONSUMER)) {
+					PerformSegue ("OnServiceConsumerDetail", this);
+				}
 			}
-
+			catch (Exception exc) {
+				Console.WriteLine("Error relacionado con userModel.GetUserAsync " + exc.Message);
+			}
 			movedToChild = true;
 		}
 
@@ -160,6 +172,11 @@ namespace ClickNDone.iOS
 		public override void ToggleMenuHandler()
 		{
 			Console.WriteLine ("**Toggle Pressed");
+		}
+
+		public override async void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+		{
+
 		}
 
 

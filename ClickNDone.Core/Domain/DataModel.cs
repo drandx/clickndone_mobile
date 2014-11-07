@@ -6,6 +6,10 @@ namespace ClickNDone.Core
 
 	public class User
 	{
+		public User()
+		{
+			this.price = "";
+		}
 		public int id { get; set;}
 		public string password { get; set; }
 		public DateTime birthAge { get; set;}
@@ -17,6 +21,8 @@ namespace ClickNDone.Core
 		public UserType userType { get; set;}
 		public string urlAvatar { get; set;}
 		public string sessionToken { get; set;}
+		public string price { get; set;}
+		public float ranking { get; set;}
 	}
 
 	public class LoginObj

@@ -25,13 +25,13 @@ namespace ClickNDone.iOS
 			try 
 			{
 				ordersModel.RequestedOrder.Supplier = await userModel.GetUserAsync(ordersModel.RequestedOrder.SupplierId, UserType.SUPPLIER);
-				this.lblRanking.Text = "?";
+				this.lblRanking.Text = ordersModel.RequestedOrder.Supplier.ranking + "";
 				this.txtSupplerName.Text = ordersModel.RequestedOrder.Supplier.names;
 				this.txtSurNames.Text = ordersModel.RequestedOrder.Supplier.surnames;
 				this.txtUpplierPhone.Text = ordersModel.RequestedOrder.Supplier.mobile;
 				this.txtClickCode.Text = ordersModel.RequestedOrder.ClickCode;
 				this.txtState.Text = ordersModel.RequestedOrder.Status + "";
-				this.txtPrice.Text = "QuienloPone?";
+				this.txtPrice.Text = ordersModel.RequestedOrder.Supplier.price;
 				this.txtServiceDate.Text = ordersModel.RequestedOrder.GetReservationDate();
 				this.txtServiceTime.Text = ordersModel.RequestedOrder.GetReservationTime();
 
