@@ -4,11 +4,15 @@ using System;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using ClickNDone.Core;
 
 namespace ClickNDone.iOS
 {
 	public partial class SugerenciasController : MyViewController
 	{
+		readonly UserModel UserModel = (UserModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(UserModel));
+
+
 		public SugerenciasController (IntPtr handle) : base (handle)
 		{
 		}
@@ -18,6 +22,20 @@ namespace ClickNDone.iOS
 			base.ViewDidLoad ();
 			this.LoadLeftbarButton ();
 			this.AddKeyboarListeners ();
+			var user = UserModel.User;
+			txtUserName.Text = user.names;
+			txtApellido.Text = user.surnames;
+
+			btnSendComment.TouchUpInside += (sender, e) => 
+			{
+				new UIAlertView("Enfio Exitioso", "Su sugerencia fue enviada con exito", null, "Ok").Show();
+				this.txtComments.Text = "";
+			};
+
+			btnClean.TouchUpInside += (sender, e) => 
+			{
+				this.txtComments.Text = "";
+			};
 		}
 	}
 }

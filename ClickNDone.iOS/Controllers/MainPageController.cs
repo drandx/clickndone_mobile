@@ -42,7 +42,7 @@ namespace ClickNDone.iOS
 							new MyImageStringElement ("", UIImage.FromFile ("images/btn_servicios_activos.png"), false),
 							//new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_historial.png"), false),
 							//new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_ranking.png"), false),
-							//new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_sugerencias.png"), false),
+							new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_sugerencias.png"), false),
 						},
 					},
 					ViewControllers = new [] {//here we link Controllers to the elements on the sections
@@ -52,7 +52,7 @@ namespace ClickNDone.iOS
 						this.Storyboard.InstantiateViewController ("SupplierAgendaNavigation") as UIViewController,
 						//this.Storyboard.InstantiateViewController ("HistorialController") as UIViewController,
 						//this.Storyboard.InstantiateViewController ("RankingController") as UIViewController,
-						//this.Storyboard.InstantiateViewController ("SugerenciasController") as UIViewController,
+						this.Storyboard.InstantiateViewController ("SugerenciasController") as UIViewController,
 					}
 				};
 			}

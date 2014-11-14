@@ -55,7 +55,7 @@
     </MtouchI18n>
     <MtouchArch>ARMv7</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>49fe5fbe-56a2-48a9-bff3-28d18b7b4ccf</CodesignProvision>
+    <CodesignProvision>6d01ff6b-c3c8-439e-8e73-de9723abca6b</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>

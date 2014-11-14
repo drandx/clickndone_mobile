@@ -1,1 +1,7 @@
-Cambios...
+1. cuando ingreso una clave errada sale mensaje en ingles cambiar a español **
+2. en terminos y condiciones quitar el boton cerrar ya que hay ya un boton de volver. **
+3. olvidaste tu clave no esta sirviendo dejemos ese boton inactivo. **
+6. cuando selecciono la categoria y salen las subcategorias. esas subcategorias deben quedar organizadas en orden alfabético. **
+8. una vez el servicio es solicitado por el user desde el app y es confirmado. ocultar el ranking:? por ahora poner el precio por servicio. **
+9.cuando el usuario cancela el servicio, ocultar el ranking:? por ahora **
+10. cuando estoy en la orden confirmada y le doy click al boton de home y luego le doy click a servicios activos me sale arriba un texto que dice agenda de servicios no deberia decir eso sino servicios activos. una vez selecciono una orden solo puedo visualizarla y cancelarla. **
