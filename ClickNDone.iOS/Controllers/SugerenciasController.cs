@@ -28,7 +28,7 @@ namespace ClickNDone.iOS
 
 			btnSendComment.TouchUpInside += (sender, e) => 
 			{
-				new UIAlertView("Enfio Exitioso", "Su sugerencia fue enviada con exito", null, "Ok").Show();
+				new UIAlertView("Envío Exitioso", "Su sugerencia fue enviada con exito", null, "Ok").Show();
 				this.txtComments.Text = "";
 			};
 
