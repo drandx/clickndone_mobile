@@ -30,12 +30,34 @@ namespace ClickNDone.iOS
 		public async Task<bool> LoadMenuItems()
 		{
 			var scrollerSubviews = this.scrollerAgenda.Subviews;
-			if(userModel.UserType.Equals(UserType.CONSUMER))
+			/*if(userModel.UserType.Equals(UserType.CONSUMER))
 				lblAgendaServicios.Text = " Servicios Activos";
 			else
-				lblAgendaServicios.Text = " Agenda de Servicios";
+				lblAgendaServicios.Text = " Agenda de Servicios";*/
 
 
+			//Coded to deal with Historial de servicios
+			ServiceState state = ServiceState.UNKNOWN;
+			if (userModel.UserType.Equals (UserType.CONSUMER)) {
+				if (this.RestorationIdentifier == "HistorialController") {
+					lblAgendaServicios.Text = " Historial de Servicios";
+					state = ServiceState.FINALIZADO;
+				} else {
+					lblAgendaServicios.Text = " Servicios Activos";
+					state = ServiceState.CONFIRMADO;
+				}
+			}
+			else
+			{
+				if (this.RestorationIdentifier == "HistorialController") {
+					lblAgendaServicios.Text = " Proveedor Historial de Servicios";
+					state = ServiceState.FINALIZADO;
+				} else {
+					lblAgendaServicios.Text = " Proveedor Agenda de Servicios";
+					state = ServiceState.CONFIRMADO;
+				}
+			}
+			//Coded to deal with Historial de servicios ends here
 			foreach (UIView subView in scrollerSubviews) {
 				subView.RemoveFromSuperview ();
 			}
@@ -43,7 +65,7 @@ namespace ClickNDone.iOS
 			scrollerHeigt = 0.0f;
 
 			try {
-				var requesterOrders = await ordersModel.GetOrdersListAsync (userModel.User.id, ServiceState.CONFIRMADO, userModel.UserType);
+				var requesterOrders = await ordersModel.GetOrdersListAsync (userModel.User.id, state, userModel.UserType);
 				ordersModel.SupplierAgenda = requesterOrders;
 
 				foreach(Order item in requesterOrders)
@@ -81,6 +103,9 @@ namespace ClickNDone.iOS
 			base.ViewDidLoad ();
 			this.AddKeyboarListeners ();
 			this.LoadLeftbarButton ();
+
+			var stackNavigationControllers = this.NavigationController.ViewControllers;
+
 		}
 
 		private async void handler(Object sender, EventArgs args)
@@ -91,14 +116,19 @@ namespace ClickNDone.iOS
 				var requesterUser = await userModel.GetUserAsync (ordersModel.RequestedOrder.UserId, UserType.CONSUMER);
 				ordersModel.RequestedOrder.User = requesterUser;
 
-				if (userModel.User.userType.Equals (UserType.SUPPLIER)) {
-					PerformSegue ("OnServiceDetail", this);
-				} else if (userModel.User.userType.Equals (UserType.CONSUMER)) {
-					PerformSegue ("OnServiceConsumerDetail", this);
+				if (this.RestorationIdentifier == "HistorialController") {
+					PerformSegue ("OnFinishedServiceDetail", this);
+				}
+				else{
+					if (userModel.User.userType.Equals (UserType.SUPPLIER)) {
+						PerformSegue ("OnServiceDetail", this);
+					} else if (userModel.User.userType.Equals (UserType.CONSUMER)) {
+						PerformSegue ("OnServiceConsumerDetail", this);
+					}
 				}
 			}
 			catch (Exception exc) {
-				Console.WriteLine("Error relacionado con userModel.GetUserAsync " + exc.Message);
+				Console.WriteLine("Error SupplierAgendaCController.handler " + exc.Message);
 			}
 			movedToChild = true;
 		}

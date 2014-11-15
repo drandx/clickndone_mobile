@@ -333,6 +333,10 @@
     <Compile Include="Controllers\SupplierStartedServiceController.designer.cs">
       <DependentUpon>SupplierStartedServiceController.cs</DependentUpon>
     </Compile>
+    <Compile Include="FinishedServiceDetailController.cs" />
+    <Compile Include="FinishedServiceDetailController.designer.cs">
+      <DependentUpon>FinishedServiceDetailController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
