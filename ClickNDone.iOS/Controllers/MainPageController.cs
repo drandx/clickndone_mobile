@@ -25,7 +25,7 @@ namespace ClickNDone.iOS
 			base.ViewDidLoad ();
 
 			try {
-				if((!CategoriesModel.Loaded) && (loginViewModel.UserType.Equals(UserType.CONSUMER)))
+				if((!CategoriesModel.Loaded))
 					await categoriesModel.GetCategories ();
 			} catch (Exception exc) {
 				Console.WriteLine ("Problems loading categories " + exc.Message);
@@ -41,8 +41,9 @@ namespace ClickNDone.iOS
 							new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_categorias.png"), false),
 							new MyImageStringElement ("", UIImage.FromFile ("images/btn_servicios_activos.png"), false),
 							new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_historial.png"), false),
-							//new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_ranking.png"), false),
 							new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_sugerencias.png"), false),
+							new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_cerrar.png"), false),
+
 						},
 					},
 					ViewControllers = new [] {//here we link Controllers to the elements on the sections
@@ -51,7 +52,6 @@ namespace ClickNDone.iOS
 						this.Storyboard.InstantiateViewController ("CategoryController") as UIViewController,
 						this.Storyboard.InstantiateViewController ("SupplierAgendaNavigation") as UIViewController,
 						this.Storyboard.InstantiateViewController ("HistorialControllerNavigation") as UIViewController,
-						//this.Storyboard.InstantiateViewController ("RankingController") as UIViewController,
 						this.Storyboard.InstantiateViewController ("SugerenciasController") as UIViewController,
 					}
 				};
@@ -66,7 +66,7 @@ namespace ClickNDone.iOS
 							new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_agenda.png"), false),
 							new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_sugerencias.png"), false),
 							new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_historico.png"), false),
-							//new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_ranking.png"), false),
+							new MyImageStringElement ("", UIImage.FromFile ("images/btn_menu_cerrar.png"), false),
 						},
 					},
 					ViewControllers = new [] {//here we link Controllers to the elements on the sections
@@ -75,7 +75,6 @@ namespace ClickNDone.iOS
 						this.Storyboard.InstantiateViewController ("SupplierAgendaNavigation") as UIViewController,
 						this.Storyboard.InstantiateViewController ("SugerenciasController") as UIViewController,
 						this.Storyboard.InstantiateViewController ("HistorialControllerNavigation") as UIViewController,
-						//this.Storyboard.InstantiateViewController ("RankingController") as UIViewController,
 					}
 				};
 

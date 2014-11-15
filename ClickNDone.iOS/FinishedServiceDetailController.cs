@@ -4,13 +4,43 @@ using System;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using ClickNDone.Core;
 
 namespace ClickNDone.iOS
 {
 	public partial class FinishedServiceDetailController : UIViewController
 	{
+		readonly OrdersModel ordersModel = (OrdersModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(OrdersModel));
+		readonly UserModel userModel = (UserModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(UserModel));
+		readonly CategoriesModel categoriesModel = (CategoriesModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(CategoriesModel));
+
 		public FinishedServiceDetailController (IntPtr handle) : base (handle)
 		{
+		}
+
+		public override void ViewDidLoad()
+		{
+			Category category = categoriesModel.GetCategoryById (ordersModel.RequestedOrder.CategoryId);
+			categoriesModel.SelectedCategory = category;
+			Category subCategory = categoriesModel.GetSubCategoryById (ordersModel.RequestedOrder.SubCategoryId);
+			imgCat.Image = UIImage.FromBundle (category.ImageName);
+
+			txtDate.Text = ordersModel.RequestedOrder.ReservationDate.ToString();
+			txtClickCode.Text = ordersModel.RequestedOrder.ClickCode;
+			txtOrderState.Text = ordersModel.RequestedOrder.Status.ToString ();
+			lblSubcategory.Text = subCategory.Name;
+
+
+
+			if (userModel.UserType.Equals (UserType.CONSUMER)) {
+				lblUserType.Text = "Datos del Proveedor";
+				txtLastName.Text = ordersModel.RequestedOrder.Supplier.surnames;
+				txtUserName.Text = ordersModel.RequestedOrder.Supplier.names;
+			} else {
+				lblUserType.Text = "Datos del Usuario";
+				txtLastName.Text = ordersModel.RequestedOrder.User.surnames;
+				txtUserName.Text = ordersModel.RequestedOrder.User.names;
+			}
 		}
 	}
 }

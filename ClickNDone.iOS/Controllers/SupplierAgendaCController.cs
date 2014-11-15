@@ -114,7 +114,9 @@ namespace ClickNDone.iOS
 			ordersModel.RequestedOrder = ordersModel.SupplierAgenda.Where (a => a.Id == selectedOrder.Tag).First();
 			try {
 				var requesterUser = await userModel.GetUserAsync (ordersModel.RequestedOrder.UserId, UserType.CONSUMER);
+				var supplierUser = await userModel.GetUserAsync (ordersModel.RequestedOrder.SupplierId, UserType.SUPPLIER);
 				ordersModel.RequestedOrder.User = requesterUser;
+				ordersModel.RequestedOrder.Supplier = supplierUser;
 
 				if (this.RestorationIdentifier == "HistorialController") {
 					PerformSegue ("OnFinishedServiceDetail", this);
@@ -208,7 +210,6 @@ namespace ClickNDone.iOS
 		{
 
 		}
-
 
 
 	}

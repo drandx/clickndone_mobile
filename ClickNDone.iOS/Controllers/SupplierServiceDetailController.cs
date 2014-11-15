@@ -23,6 +23,11 @@ namespace ClickNDone.iOS
 			base.ViewDidLoad ();
 			this.AddKeyboarListeners ();
 
+			txtDate.Text = ordersModel.RequestedOrder.GetReservationDate();
+			txtUserName.Text = ordersModel.RequestedOrder.User.names;
+			txtUserLastName.Text = ordersModel.RequestedOrder.User.surnames;
+			txtState.Text = ordersModel.RequestedOrder.Status.ToString();
+
 			btnInitService.TouchUpInside += async(sender, e) =>
 			{
 				try {
@@ -49,11 +54,6 @@ namespace ClickNDone.iOS
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
-			txtDate.Text = ordersModel.RequestedOrder.GetReservationDate();
-			txtUserName.Text = ordersModel.RequestedOrder.User.names;
-			txtUserLastName.Text = ordersModel.RequestedOrder.User.surnames;
-			txtState.Text = ordersModel.RequestedOrder.Status.ToString();
-
 		}
 
 		public override void ViewWillAppear (bool animated)

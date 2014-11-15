@@ -2238,7 +2238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kfb-Eq-HM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3929" y="-2229"/>
+            <point key="canvasLocation" x="4009" y="-2469"/>
         </scene>
         <!--Supplier Started Service Controller-->
         <scene sceneID="Jwa-3J-Uo3">
@@ -2414,7 +2414,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hqk-vT-SNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4413" y="-2229"/>
+            <point key="canvasLocation" x="4493" y="-2469"/>
         </scene>
         <!--Supplier Rate Finished Service Controller-->
         <scene sceneID="gXJ-cw-zba">
@@ -2551,7 +2551,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLJ-tu-Zpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4916" y="-2229"/>
+            <point key="canvasLocation" x="4996" y="-2469"/>
         </scene>
         <!--Supplier Cancel Service Controller-->
         <scene sceneID="9O3-8k-c9J">
@@ -3089,6 +3089,16 @@
                     <navigationItem key="navigationItem" id="2JA-ij-2PU">
                         <barButtonItem key="backBarButtonItem" title="Atras" id="fMe-kk-Hug"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imgCat" destination="Wa0-fs-h4b" id="JBB-4I-wqW"/>
+                        <outlet property="lblSubcategory" destination="PjK-zx-F2N" id="gm3-SZ-3mQ"/>
+                        <outlet property="lblUserType" destination="PkV-Fe-iAS" id="Pb8-Wz-5lF"/>
+                        <outlet property="txtClickCode" destination="Stt-a8-Kzt" id="vdZ-5H-NV6"/>
+                        <outlet property="txtDate" destination="NQP-aF-oKo" id="jh4-AI-zN9"/>
+                        <outlet property="txtLastName" destination="Akq-9a-gI0" id="PUe-Vf-mxc"/>
+                        <outlet property="txtOrderState" destination="h62-jA-ozX" id="wMh-KE-Wbh"/>
+                        <outlet property="txtUserName" destination="C6x-ba-Ac7" id="s0L-sm-4Xh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6BK-7Q-tHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3124,11 +3134,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Pb7-WV-ZAg"/>
-        <segue reference="B0I-qk-ijs"/>
-        <segue reference="R6n-7M-aYX"/>
-        <segue reference="vjs-Zp-xLd"/>
         <segue reference="D8J-HL-GE4"/>
         <segue reference="fBG-wL-bDp"/>
+        <segue reference="vjs-Zp-xLd"/>
+        <segue reference="gYy-83-slm"/>
+        <segue reference="R6n-7M-aYX"/>
+        <segue reference="B0I-qk-ijs"/>
     </inferredMetricsTieBreakers>
 </document>

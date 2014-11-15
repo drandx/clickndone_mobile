@@ -14,6 +14,7 @@ namespace ClickNDone.iOS
 
 		readonly CategoriesModel categoriesModel = (CategoriesModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(CategoriesModel));
 		readonly OrdersModel ordersModel = (OrdersModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(OrdersModel));
+		readonly UserModel userModel = (UserModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(UserModel));
 
 		public ServiceRequestController (IntPtr handle) : base (handle)
 		{
@@ -94,6 +95,7 @@ namespace ClickNDone.iOS
 				}
 				else
 				{
+					ordersModel.RequestedOrder.Supplier = await userModel.GetUserAsync(ordersModel.RequestedOrder.SupplierId, UserType.SUPPLIER);
 					PerformSegue("OnConfirmed",this);
 				}
 			}
