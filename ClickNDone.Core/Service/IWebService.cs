@@ -18,6 +18,8 @@ namespace ClickNDone.Core
 		Task<List<Order>> GetOrdersListAsync(int userId, ServiceState state, UserType userType);
 		List<Order> GetOrdersList(int userId, ServiceState state, UserType userType);
 		Task<bool> ChangeOrderStateAsync(int orderId, ServiceState state, string comments = null, string ranking = null);
+		Task<List<ServicePrices>> GetServicePrices();
+		Task<bool> PostSuggestion(int userId, UserType userType, string message);
 	}
 }
 

@@ -467,15 +467,79 @@ namespace ClickNDone.Core
 					await client.UploadStringTaskAsync (url, "POST", orderJson);
 					return true;
 				}
-				return false;
-
-
 				return true;
 			} catch (Exception exc) {
 				Console.WriteLine ("Crashing on ChangeOrderState - " + exc.Message);
 				return false;
 			}
 		}
+
+		/*
+		* 
+		* 
+		* 
+		*/
+		public async Task<List<ServicePrices>> GetServicePrices ()
+		{
+			List<ServicePrices> prices = new List<ServicePrices> ();
+			try{
+				client.Headers.Add (HttpRequestHeader.Accept, "application/json"); 
+				client.Headers.Add (HttpRequestHeader.ContentType, "application/json"); 
+				client.Headers.Set ("X-Origin-OS", "Iphone 7");
+				client.Headers.Set ("User-Agent", "IOS7");
+				string url = Constants.WebServiceHost + "get_price_range";
+
+				if (!client.IsBusy) {
+					var response = await client.DownloadStringTaskAsync (url);
+					var objListResp = JObject.Parse (response);
+					foreach (var objResp in objListResp["range"]) {
+						ServicePrices price = new ServicePrices();
+						price.Value =  objResp ["price"].ToString ();
+						prices.Add(price);
+					}
+				}
+
+
+			}
+			catch(Exception exc){
+				Console.WriteLine ("Crashing on GetServicePrices - " + exc.Message);
+			}
+			return prices;
+
+		}
+
+		/**
+		 * 
+		 * 
+		 * 
+		 * */
+		public async Task<bool> PostSuggestion(int userId, UserType userType, string message)
+		{
+			try {
+				client.Headers.Add (HttpRequestHeader.Accept, "application/json"); 
+				client.Headers.Add (HttpRequestHeader.ContentType, "application/json"); 
+				client.Headers.Set ("X-Origin-OS", "Iphone 7");
+				client.Headers.Set ("User-Agent", "IOS7");
+
+				string url = Constants.WebServiceHost + "InsertMessage";
+				IDictionary<String,Object> messageAttributes = new Dictionary<string, object> ();
+				messageAttributes.Add ("mensaje", message);
+				messageAttributes.Add ("iduser", userId);
+				messageAttributes.Add ("userType", userType.ToString());
+
+				if (!client.IsBusy) {
+					var orderJson = JsonConvert.SerializeObject (messageAttributes);
+					await client.UploadStringTaskAsync (url, "POST", orderJson);
+					return true;
+				}
+				return true;
+			} catch (Exception exc) {
+				Console.WriteLine ("Crashing on PostSuggestion - " + exc.Message);
+				return false;
+			}
+
+		}
+
 	}
 }
 

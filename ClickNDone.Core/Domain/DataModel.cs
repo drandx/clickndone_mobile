@@ -59,6 +59,11 @@ namespace ClickNDone.Core
 		public Category SubCategory { get; set;}
 	}
 
+	public class ServicePrices
+	{
+		public string Value { get; set;}
+	}
+
 	public class Order
 	{
 		public int Id { get; set;}

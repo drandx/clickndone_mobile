@@ -26,9 +26,12 @@ namespace ClickNDone.iOS
 
 			try {
 				if((!CategoriesModel.Loaded))
+				{
 					await categoriesModel.GetCategories ();
+					await categoriesModel.GetServicePrices(); 
+				}
 			} catch (Exception exc) {
-				Console.WriteLine ("Problems loading categories " + exc.Message);
+				Console.WriteLine ("Problems loading categories/ServicePrices " + exc.Message);
 			}
 			FlyoutNavigationController LateralBar = new FlyoutNavigationController();
 

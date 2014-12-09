@@ -9,6 +9,7 @@ namespace ClickNDone.Core
 	public class CategoriesModel : BaseViewModel
 	{
 		public List<Category> Categories{ get; set; }
+		public List<ServicePrices> Prices { get; set;}
 		public Category SelectedCategory;
 		public Category SelectedSubcategory;
 		public static bool Loaded { get; set;}
@@ -52,6 +53,22 @@ namespace ClickNDone.Core
 			}
 			return new Category ();
 		}
+
+
+		public async Task GetServicePrices()
+		{
+			IsBusy = true;
+			try
+			{
+				Prices = await service.GetServicePrices();
+			}
+			finally {
+				IsBusy = false;
+				Loaded = true;
+			}
+
+		}
+
 
 		private void SortCategoriesAsc()
 		{

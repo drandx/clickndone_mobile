@@ -126,6 +126,21 @@ namespace ClickNDone.Core
 
 		}
 
+
+		public async Task<bool> PostSuggestion(int userId, UserType userType, string message)
+		{
+			try
+			{
+				IsBusy = true;
+				var retSuggestion = await service.PostSuggestion(userId, userType, message);
+				return retSuggestion;
+			}
+			finally {
+				IsBusy = false;
+			}
+
+		}
+
 	}
 }
 
