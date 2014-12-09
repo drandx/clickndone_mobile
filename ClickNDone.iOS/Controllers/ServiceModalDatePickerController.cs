@@ -20,18 +20,18 @@ namespace ClickNDone.iOS
 		private string selectedToMoney;
 
 		readonly OrdersModel ordersModel = (OrdersModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(OrdersModel));
+		readonly CategoriesModel categoriesModel = (CategoriesModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(CategoriesModel));
 
 
-		private readonly IList<string> fromMoney = new List<string>
-		{
+
+		private IList<string> fromMoney = new List<string> {
 			"desconocido",
 			"10000",
 			"30000",
 			"50000",
 			"70000"
 		};
-		private readonly IList<string> toMoney = new List<string>
-		{
+		private IList<string> toMoney = new List<string> {
 			"desconocido",
 			"10000",
 			"30000",
@@ -50,69 +50,79 @@ namespace ClickNDone.iOS
 			base.ViewDidLoad ();
 			this.AddKeyboarListeners ();
 
+			//Prices Init
+			if (categoriesModel.Prices.Count > 0) {
+				fromMoney = new List<string> ();
+				toMoney = new List<string> ();
+				foreach (var price in categoriesModel.Prices) {
+					fromMoney.Add (price.Value);
+					toMoney.Add (price.Value);
+				}
+			}
+
 			//Date Selector
-			UITapGestureRecognizer labelTap = new UITapGestureRecognizer(() => {
+			UITapGestureRecognizer labelTap = new UITapGestureRecognizer (() => {
 				DatePickerButtonTapped ();
 			});
-			UITapGestureRecognizer labelDayTap = new UITapGestureRecognizer(() => {
+			UITapGestureRecognizer labelDayTap = new UITapGestureRecognizer (() => {
 				DatePickerButtonTapped ();
 			});
-			UITapGestureRecognizer labelYearTap = new UITapGestureRecognizer(() => {
+			UITapGestureRecognizer labelYearTap = new UITapGestureRecognizer (() => {
 				DatePickerButtonTapped ();
 			});
 			lblMonth.UserInteractionEnabled = true;
-			lblMonth.AddGestureRecognizer(labelTap);
+			lblMonth.AddGestureRecognizer (labelTap);
 
 			lblDay.UserInteractionEnabled = true;
-			lblDay.AddGestureRecognizer(labelDayTap);
+			lblDay.AddGestureRecognizer (labelDayTap);
 
 			lblYear.UserInteractionEnabled = true;
-			lblYear.AddGestureRecognizer(labelYearTap);
+			lblYear.AddGestureRecognizer (labelYearTap);
 
 			//Time Selector
-			UITapGestureRecognizer labelHourTap = new UITapGestureRecognizer(() => {
+			UITapGestureRecognizer labelHourTap = new UITapGestureRecognizer (() => {
 				TimePickerButtonTapped ();
 			});
-			UITapGestureRecognizer labelMinuteTap = new UITapGestureRecognizer(() => {
+			UITapGestureRecognizer labelMinuteTap = new UITapGestureRecognizer (() => {
 				TimePickerButtonTapped ();
 			});
-			UITapGestureRecognizer labelAMPMTap = new UITapGestureRecognizer(() => {
+			UITapGestureRecognizer labelAMPMTap = new UITapGestureRecognizer (() => {
 				TimePickerButtonTapped ();
 			});
 
 			lblHour.UserInteractionEnabled = true;
-			lblHour.AddGestureRecognizer(labelHourTap);
+			lblHour.AddGestureRecognizer (labelHourTap);
 
 			lblMinute.UserInteractionEnabled = true;
-			lblMinute.AddGestureRecognizer(labelMinuteTap);
+			lblMinute.AddGestureRecognizer (labelMinuteTap);
 
 			lblAMPM.UserInteractionEnabled = true;
-			lblAMPM.AddGestureRecognizer(labelAMPMTap);
+			lblAMPM.AddGestureRecognizer (labelAMPMTap);
 
 			//Price Selection
 			this.txtFromValue.EditingDidBegin += CustomPickerButtonTapped;
 			this.txtToValue.EditingDidBegin += ToCustomPickerButtonTapped;
 
 			//Disableing Keyboard
-			this.txtFromValue.InputView = new UIView (new RectangleF(0, 0, 1, 1));
-			this.txtToValue.InputView = new UIView (new RectangleF(0, 0, 1, 1));
+			this.txtFromValue.InputView = new UIView (new RectangleF (0, 0, 1, 1));
+			this.txtToValue.InputView = new UIView (new RectangleF (0, 0, 1, 1));
 
 			btnRequestService.TouchUpInside += (sender, e) => {
 				ordersModel.MinCost = selectedFromMoney;
 				ordersModel.MaxCost = selectedToMoney;
-				DateTime finalDateTime = new DateTime();
+				DateTime finalDateTime = new DateTime ();
 				finalDateTime = this.selectedDate;
-				TimeSpan ts = new TimeSpan(this.selectedTime.Hour, this.selectedTime.Minute, this.selectedTime.Second);
+				TimeSpan ts = new TimeSpan (this.selectedTime.Hour, this.selectedTime.Minute, this.selectedTime.Second);
 				finalDateTime = finalDateTime.Date + ts;
 				ordersModel.ReservationDate = finalDateTime;
 				ordersModel.Comments = txtComments.Text;
 				ordersModel.Location = txtAddress.Text;
 
-				if(string.IsNullOrEmpty(ordersModel.Location) || string.IsNullOrEmpty(ordersModel.Comments) || string.IsNullOrEmpty(ordersModel.MinCost.ToString()) 
-					|| string.IsNullOrEmpty(ordersModel.MaxCost.ToString()) || string.IsNullOrEmpty(ordersModel.ReservationDate.ToString()))
-					new UIAlertView("Oops!", "Ingresa correctamente los campos", null, "Ok").Show();
+				if (string.IsNullOrEmpty (ordersModel.Location) || string.IsNullOrEmpty (ordersModel.Comments) || string.IsNullOrEmpty (ordersModel.MinCost.ToString ())
+				   || string.IsNullOrEmpty (ordersModel.MaxCost.ToString ()) || string.IsNullOrEmpty (ordersModel.ReservationDate.ToString ()))
+					new UIAlertView ("Oops!", "Ingresa correctamente los campos", null, "Ok").Show ();
 				else
-					PerformSegue("OnRequestService",this);
+					PerformSegue ("OnRequestService", this);
 
 			};
 
@@ -122,38 +132,35 @@ namespace ClickNDone.iOS
 
 		async void DatePickerButtonTapped ()
 		{
-			var modalPicker = new ModalPickerViewController(ModalPickerType.Date, "Seleccione una Fecha", this)
-			{
-				HeaderBackgroundColor = UIColor.FromRGB (0,167,229),
+			var modalPicker = new ModalPickerViewController (ModalPickerType.Date, "Seleccione una Fecha", this) {
+				HeaderBackgroundColor = UIColor.FromRGB (0, 167, 229),
 				HeaderTextColor = UIColor.White,
-				TransitioningDelegate = new ModalPickerTransitionDelegate(),
+				TransitioningDelegate = new ModalPickerTransitionDelegate (),
 				ModalPresentationStyle = UIModalPresentationStyle.Custom
 			};
 
 			modalPicker.DatePicker.Mode = UIDatePickerMode.Date;
 
-			modalPicker.OnModalPickerDismissed += (s, ea) => 
-			{
+			modalPicker.OnModalPickerDismissed += (s, ea) => {
 				NSDate selectedDate = modalPicker.DatePicker.Date;
-				var dateTime = DateTime.SpecifyKind(selectedDate, DateTimeKind.Unspecified);
-				lblMonth.Text = dateTime.ToString("MMMM");
-				lblDay.Text = dateTime.Day.ToString();
-				lblYear.Text = dateTime.Year.ToString();
+				var dateTime = DateTime.SpecifyKind (selectedDate, DateTimeKind.Unspecified);
+				lblMonth.Text = dateTime.ToString ("MMMM");
+				lblDay.Text = dateTime.Day.ToString ();
+				lblYear.Text = dateTime.Year.ToString ();
 				this.selectedDate = dateTime;
-				Console.WriteLine("Selected Date: " + this.selectedDate.ToString());
+				Console.WriteLine ("Selected Date: " + this.selectedDate.ToString ());
 
 			};
 
-			await PresentViewControllerAsync(modalPicker, true);
+			await PresentViewControllerAsync (modalPicker, true);
 		}
 
 		async void TimePickerButtonTapped ()
 		{
-			var modalPicker = new ModalPickerViewController(ModalPickerType.Date, "Seleccione una Hora", this)
-			{
-				HeaderBackgroundColor = UIColor.FromRGB (0,167,229),
+			var modalPicker = new ModalPickerViewController (ModalPickerType.Date, "Seleccione una Hora", this) {
+				HeaderBackgroundColor = UIColor.FromRGB (0, 167, 229),
 				HeaderTextColor = UIColor.White,
-				TransitioningDelegate = new ModalPickerTransitionDelegate(),
+				TransitioningDelegate = new ModalPickerTransitionDelegate (),
 				ModalPresentationStyle = UIModalPresentationStyle.Custom
 			};
 
@@ -162,82 +169,75 @@ namespace ClickNDone.iOS
 			modalPicker.DatePicker.TimeZone = NSTimeZone.LocalTimeZone;
 
 
-			modalPicker.OnModalPickerDismissed += (s, ea) => 
-			{
-				var dateTime = DateTime.SpecifyKind(modalPicker.DatePicker.Date, DateTimeKind.Utc).ToLocalTime();
-				lblHour.Text = dateTime.ToString("hh");
-				lblMinute.Text = dateTime.Minute.ToString();
-				lblAMPM.Text = dateTime.ToString("tt");
+			modalPicker.OnModalPickerDismissed += (s, ea) => {
+				var dateTime = DateTime.SpecifyKind (modalPicker.DatePicker.Date, DateTimeKind.Utc).ToLocalTime ();
+				lblHour.Text = dateTime.ToString ("hh");
+				lblMinute.Text = dateTime.Minute.ToString ();
+				lblAMPM.Text = dateTime.ToString ("tt");
 				this.selectedTime = dateTime;
 
 			};
 
-			await PresentViewControllerAsync(modalPicker, true);
+			await PresentViewControllerAsync (modalPicker, true);
 		}
 
 		async void CustomPickerButtonTapped (object sender, EventArgs e)
 		{
 			//Create custom data source
-			var FromPriceList = new List<string>();
-			foreach(var fromPrice in fromMoney)
-			{
-				FromPriceList.Add(fromPrice);
+			var FromPriceList = new List<string> ();
+			foreach (var fromPrice in fromMoney) {
+				FromPriceList.Add (fromPrice);
 			}
 
 			//Create the modal picker and style it as you see fit
-			var modalPicker = new ModalPickerViewController(ModalPickerType.Custom, "Seleccione un Precio Inicial", this)
-			{
-				HeaderBackgroundColor = UIColor.FromRGB (0,167,229),
+			var modalPicker = new ModalPickerViewController (ModalPickerType.Custom, "Seleccione un Precio Inicial", this) {
+				HeaderBackgroundColor = UIColor.FromRGB (0, 167, 229),
 				HeaderTextColor = UIColor.White,
-				TransitioningDelegate = new ModalPickerTransitionDelegate(),
+				TransitioningDelegate = new ModalPickerTransitionDelegate (),
 				ModalPresentationStyle = UIModalPresentationStyle.Custom
 			};
 
 			//Create the model for the Picker View
-			modalPicker.PickerView.Model = new CustomPickerModel(FromPriceList);
+			modalPicker.PickerView.Model = new CustomPickerModel (FromPriceList);
 
 			//On an item is selected, update our label with the selected item.
-			modalPicker.OnModalPickerDismissed += (s, ea) => 
-			{
-				var index = modalPicker.PickerView.SelectedRowInComponent(0);
-				this.selectedFromMoney = FromPriceList[index];
-				this.txtFromValue.Text = FromPriceList[index];
+			modalPicker.OnModalPickerDismissed += (s, ea) => {
+				var index = modalPicker.PickerView.SelectedRowInComponent (0);
+				this.selectedFromMoney = FromPriceList [index];
+				this.txtFromValue.Text = FromPriceList [index];
 			};
 
-			await PresentViewControllerAsync(modalPicker, true);
+			await PresentViewControllerAsync (modalPicker, true);
 		}
 
 
 		async void ToCustomPickerButtonTapped (object sender, EventArgs e)
 		{
 			//Create custom data source
-			var FromPriceList = new List<string>();
-			foreach(var fromPrice in toMoney)
-			{
-				FromPriceList.Add(fromPrice);
+			var FromPriceList = new List<string> ();
+			foreach (var fromPrice in toMoney) {
+				FromPriceList.Add (fromPrice);
 			}
 
 			//Create the modal picker and style it as you see fit
-			var modalPicker = new ModalPickerViewController(ModalPickerType.Custom, "Seleccione un Precio Inicial", this)
-			{
-				HeaderBackgroundColor = UIColor.FromRGB (0,167,229),
+			var modalPicker = new ModalPickerViewController (ModalPickerType.Custom, "Seleccione un Precio Inicial", this) {
+				HeaderBackgroundColor = UIColor.FromRGB (0, 167, 229),
 				HeaderTextColor = UIColor.White,
-				TransitioningDelegate = new ModalPickerTransitionDelegate(),
+				TransitioningDelegate = new ModalPickerTransitionDelegate (),
 				ModalPresentationStyle = UIModalPresentationStyle.Custom
 			};
 
 			//Create the model for the Picker View
-			modalPicker.PickerView.Model = new CustomPickerModel(FromPriceList);
+			modalPicker.PickerView.Model = new CustomPickerModel (FromPriceList);
 
 			//On an item is selected, update our label with the selected item.
-			modalPicker.OnModalPickerDismissed += (s, ea) => 
-			{
-				var index = modalPicker.PickerView.SelectedRowInComponent(0);
-				this.selectedToMoney = FromPriceList[index];
-				this.txtToValue.Text = FromPriceList[index];
+			modalPicker.OnModalPickerDismissed += (s, ea) => {
+				var index = modalPicker.PickerView.SelectedRowInComponent (0);
+				this.selectedToMoney = FromPriceList [index];
+				this.txtToValue.Text = FromPriceList [index];
 			};
 
-			await PresentViewControllerAsync(modalPicker, true);
+			await PresentViewControllerAsync (modalPicker, true);
 		}
 
 	}
