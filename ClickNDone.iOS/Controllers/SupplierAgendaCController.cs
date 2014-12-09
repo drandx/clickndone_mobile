@@ -66,6 +66,7 @@ namespace ClickNDone.iOS
 
 			try {
 				var requesterOrders = await ordersModel.GetOrdersListAsync (userModel.User.id, state, userModel.UserType);
+				requesterOrders.Reverse();
 				ordersModel.SupplierAgenda = requesterOrders;
 
 				foreach(Order item in requesterOrders)
