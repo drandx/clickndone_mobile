@@ -11,7 +11,7 @@ namespace ClickNDone.iOS
 	public partial class SupplierRateFinishedServiceController : MyViewController
 	{
 		readonly OrdersModel ordersModel = (OrdersModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(OrdersModel));
-
+		readonly UserModel userModel = (UserModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(UserModel));
 
 		public SupplierRateFinishedServiceController (IntPtr handle) : base (handle)
 		{
@@ -27,6 +27,32 @@ namespace ClickNDone.iOS
 			txtClickCode.Text = ordersModel.RequestedOrder.ClickCode;
 			txtEndTime.Text = ordersModel.EndTime.ToString("HH:mm:ss");
 			txtStartTime.Text = ordersModel.InitTime.ToString("HH:mm:ss");
+
+			btnRate.TouchUpInside += async (sender, e) => 
+			{
+				await ordersModel.RateUser(userModel.User.id,this.txtComments.Text,Convert.ToDouble(this.txtRanking.Text),ordersModel.RequestedOrder.Id,userModel.User.userType);
+				PerformSegue("OnRateSupplier", this);
+			};
+
+		}
+
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(false);
+			ordersModel.IsBusyChanged += OnIsBusyChanged;
+		}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(false);
+			ordersModel.IsBusyChanged -= OnIsBusyChanged;
+		}
+
+		void OnIsBusyChanged(object sender, EventArgs e)
+		{
+			txtComments.Enabled = 
+				txtRanking.Enabled =
+					indicator.Hidden = !ordersModel.IsBusy;
 		}
 	}
 }

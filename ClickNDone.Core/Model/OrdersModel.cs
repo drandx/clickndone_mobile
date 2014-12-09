@@ -141,6 +141,20 @@ namespace ClickNDone.Core
 
 		}
 
+		public async Task<bool> RateUser(int userId, string message, double rate, int id_order, UserType userType)
+		{
+			try
+			{
+				IsBusy = true;
+				var retSuggestion = await service.RateUser(userId, message, rate, id_order, userType);
+				return retSuggestion;
+			}
+			finally {
+				IsBusy = false;
+			}
+
+		}
+
 	}
 }
 

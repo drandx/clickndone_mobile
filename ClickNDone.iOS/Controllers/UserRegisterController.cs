@@ -34,6 +34,7 @@ namespace ClickNDone.iOS
 				try {
 					await userModel.Register();
 					new UIAlertView("Felicitaciones!", "Se ha registrado con exito", null, "Aceptar").Show();
+					this.ClearFields();
 				}
 				catch (Exception exc)
 				{

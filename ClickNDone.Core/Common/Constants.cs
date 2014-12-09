@@ -20,9 +20,6 @@ namespace ClickNDone.Core
 		RECHAZADO_PROVEEDOR=5, 
 		RECHAZADO_USUARIO=6, 
 		ORDEN_INICIADA=7
-
-		
-
 	};
 
 	public class Constants

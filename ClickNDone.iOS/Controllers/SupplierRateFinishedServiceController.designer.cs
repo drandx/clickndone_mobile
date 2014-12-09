@@ -13,6 +13,12 @@ namespace ClickNDone.iOS
 	partial class SupplierRateFinishedServiceController
 	{
 		[Outlet]
+		MonoTouch.UIKit.UIButton btnRate { get; set; }
+
+		[Outlet]
+		MonoTouch.UIKit.UIActivityIndicatorView indicator { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UITextField txtClickCode { get; set; }
 
 		[Outlet]
@@ -68,6 +74,16 @@ namespace ClickNDone.iOS
 			if (txtState != null) {
 				txtState.Dispose ();
 				txtState = null;
+			}
+
+			if (btnRate != null) {
+				btnRate.Dispose ();
+				btnRate = null;
+			}
+
+			if (indicator != null) {
+				indicator.Dispose ();
+				indicator = null;
 			}
 		}
 	}

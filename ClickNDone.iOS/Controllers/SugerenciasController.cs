@@ -26,9 +26,9 @@ namespace ClickNDone.iOS
 			txtUserName.Text = user.names;
 			txtApellido.Text = user.surnames;
 
-			btnSendComment.TouchUpInside += (sender, e) => 
+			btnSendComment.TouchUpInside += async (sender, e) => 
 			{
-				ordersModel.PostSuggestion(UserModel.User.id, UserModel.UserType, this.txtComments.Text);
+				await ordersModel.PostSuggestion(UserModel.User.id, UserModel.UserType, this.txtComments.Text);
 				new UIAlertView("Envío Exitioso", "Su sugerencia fue enviada con exito", null, "Ok").Show();
 				this.txtComments.Text = "";
 			};

@@ -456,11 +456,12 @@ namespace ClickNDone.Core
 				orderAttributes.Add ("STATE", (int)state + "");
 				orderAttributes.Add ("OrderID", orderId);
 
-				if (comments != null && ranking != null) {
+				if (comments != null)
 					orderAttributes.Add ("comments", comments);
+					
+				if(ranking != null)
 					orderAttributes.Add ("rate", ranking);
 
-				}
 
 				if (!client.IsBusy) {
 					var orderJson = JsonConvert.SerializeObject (orderAttributes);
@@ -469,7 +470,7 @@ namespace ClickNDone.Core
 				}
 				return true;
 			} catch (Exception exc) {
-				Console.WriteLine ("Crashing on ChangeOrderState - " + exc.Message);
+				Console.WriteLine ("Crashing on ChangeOrderStateAsync - " + exc.Message);
 				return false;
 			}
 		}
@@ -535,6 +536,41 @@ namespace ClickNDone.Core
 				return true;
 			} catch (Exception exc) {
 				Console.WriteLine ("Crashing on PostSuggestion - " + exc.Message);
+				return false;
+			}
+
+		}
+
+
+		/**
+		 * 
+		 * 
+		 * 
+		 * */
+		public async Task<bool> RateUser(int userId, string message, double rate, int id_order, UserType userType)
+		{
+			try {
+				client.Headers.Add (HttpRequestHeader.Accept, "application/json"); 
+				client.Headers.Add (HttpRequestHeader.ContentType, "application/json"); 
+				client.Headers.Set ("X-Origin-OS", "Iphone 7");
+				client.Headers.Set ("User-Agent", "IOS7");
+
+				string url = Constants.WebServiceHost + "InsertRating";
+				IDictionary<String,Object> messageAttributes = new Dictionary<string, object> ();
+				messageAttributes.Add ("iduser", userId);
+				messageAttributes.Add ("calificacion", rate);
+				messageAttributes.Add ("mensaje", message);
+				messageAttributes.Add ("id_orden", id_order);
+				messageAttributes.Add ("type", userType.Equals(UserType.CONSUMER) ? 1 : 2);
+
+				if (!client.IsBusy) {
+					var orderJson = JsonConvert.SerializeObject (messageAttributes);
+					await client.UploadStringTaskAsync (url, "POST", orderJson);
+					return true;
+				}
+				return true;
+			} catch (Exception exc) {
+				Console.WriteLine ("Crashing on RateUser - " + exc.Message);
 				return false;
 			}
 

@@ -32,7 +32,37 @@ namespace ClickNDone.iOS
 				Console.WriteLine("Error relacionado con ordersModel.RequestedOrder " + exc.Message);
 			}
 
+			btnSubmitCancel.TouchUpInside += async(sender, e) =>
+			{
+				try {
+					await ordersModel.ChangeRequestedOrderStateAsync(ServiceState.RECHAZADO_PROVEEDOR,txtReason.Text + " - " + txtDetails.Text);
+					PerformSegue("OnCanceledService", this);
+				}
+				catch (Exception exc)
+				{
+					Console.WriteLine (exc.Message);
+				}
+			};
 
+		}
+
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(false);
+			ordersModel.IsBusyChanged += OnIsBusyChanged;
+		}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(false);
+			ordersModel.IsBusyChanged -= OnIsBusyChanged;
+		}
+
+		void OnIsBusyChanged(object sender, EventArgs e)
+		{
+			txtReason.Enabled =
+				txtDetails.Enabled = 
+					indicator.Hidden = !ordersModel.IsBusy;
 		}
 
 	}

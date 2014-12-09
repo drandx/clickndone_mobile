@@ -13,6 +13,9 @@ namespace ClickNDone.iOS
 	partial class SupplierRateServiceController
 	{
 		[Outlet]
+		MonoTouch.UIKit.UIButton btnSubmitCancel { get; set; }
+
+		[Outlet]
 		MonoTouch.UIKit.UIActivityIndicatorView indicator { get; set; }
 
 		[Outlet]
@@ -60,6 +63,11 @@ namespace ClickNDone.iOS
 			if (txtUserName != null) {
 				txtUserName.Dispose ();
 				txtUserName = null;
+			}
+
+			if (btnSubmitCancel != null) {
+				btnSubmitCancel.Dispose ();
+				btnSubmitCancel = null;
 			}
 		}
 	}

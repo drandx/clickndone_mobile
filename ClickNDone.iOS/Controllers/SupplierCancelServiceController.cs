@@ -24,7 +24,6 @@ namespace ClickNDone.iOS
 
 			base.ViewDidLoad ();
 			UITapGestureRecognizer labelCancelTap = new UITapGestureRecognizer (async() => {
-				await ordersModel.ChangeRequestedOrderStateAsync(ServiceState.CONFIRMADO);
 				PerformSegue("OnCancel",this);
 			});
 			lblCancel.UserInteractionEnabled = true;

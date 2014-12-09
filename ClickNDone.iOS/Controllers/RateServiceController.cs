@@ -12,7 +12,7 @@ namespace ClickNDone.iOS
 	{
 		readonly OrdersModel ordersModel = (OrdersModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(OrdersModel));
 		readonly CategoriesModel categoriesModel = (CategoriesModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(CategoriesModel));
-
+		readonly UserModel userModel = (UserModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(UserModel));
 
 		public RateServiceController (IntPtr handle) : base (handle)
 		{
@@ -40,6 +40,7 @@ namespace ClickNDone.iOS
 				try
 				{
 					await ordersModel.ChangeRequestedOrderStateAsync(ServiceState.FINALIZADO,txtComments.Text, txtRanking.Text);
+					await ordersModel.RateUser(userModel.User.id,this.txtComments.Text,Convert.ToDouble(this.txtRanking.Text),ordersModel.RequestedOrder.Id,userModel.User.userType);
 					new UIAlertView("Felicitaciones", "El servicio ha sido calificado con exito ", null, "Ok").Show();
 					PerformSegue("OnRatedService",this);
 

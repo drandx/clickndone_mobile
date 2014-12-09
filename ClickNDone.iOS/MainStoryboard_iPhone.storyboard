@@ -180,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zEQ-Xg-fFJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1302" y="-3026"/>
+            <point key="canvasLocation" x="476" y="-2308"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gyT-Wd-Xhc">
@@ -466,19 +466,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Or8-X2-lZT">
-                                <rect key="frame" x="181" y="412" width="42" height="12"/>
+                                <rect key="frame" x="181" y="391" width="42" height="12"/>
                                 <state key="normal" backgroundImage="images/btn_borrar.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oU9-Xu-S3Y">
-                                <rect key="frame" x="253" y="412" width="52" height="12"/>
+                                <rect key="frame" x="253" y="391" width="52" height="12"/>
                                 <state key="normal" backgroundImage="images/btn_registrar.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bna-2I-Bvs">
-                                <rect key="frame" x="26" y="355" width="306" height="30"/>
+                                <rect key="frame" x="26" y="334" width="306" height="30"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" button="YES" link="YES"/>
                                 </accessibility>
@@ -492,7 +492,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4kX-hj-Y10">
-                                <rect key="frame" x="150" y="385" width="20" height="20"/>
+                                <rect key="frame" x="150" y="364" width="20" height="20"/>
                             </activityIndicatorView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="campo obligatorio" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dKZ-al-gLX" customClass="MyUITextField">
                                 <rect key="frame" x="123" y="274" width="182" height="30"/>
@@ -1532,7 +1532,7 @@
                                 <rect key="frame" x="100" y="359" width="106" height="29"/>
                                 <color key="textColor" red="0.0" green="0.65490196079999996" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xxN-fC-Gtx">
                                 <rect key="frame" x="21" y="65" width="130" height="45"/>
@@ -2524,22 +2524,24 @@
                                 <rect key="frame" x="96" y="291" width="106" height="29"/>
                                 <color key="textColor" red="0.0" green="0.65490196079999996" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K17-Ub-8r9">
                                 <rect key="frame" x="97" y="328" width="130" height="17"/>
                                 <state key="normal" backgroundImage="images/btn_enviar_calificacion.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Vst-B1-DoA" kind="modal" id="mTW-xa-XeS"/>
-                                </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bzO-V3-dLi">
+                                <rect key="frame" x="152" y="353" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="d49-8u-MvR"/>
                     <connections>
+                        <outlet property="btnRate" destination="K17-Ub-8r9" id="BRa-5w-uLD"/>
+                        <outlet property="indicator" destination="bzO-V3-dLi" id="j2w-hu-8sI"/>
                         <outlet property="txtClickCode" destination="alJ-AY-svj" id="OkO-7f-TS7"/>
                         <outlet property="txtComments" destination="CZY-ag-LDn" id="6da-r1-lBg"/>
                         <outlet property="txtDate" destination="NCX-b3-bTa" id="0PC-tI-4Ca"/>
@@ -2547,6 +2549,7 @@
                         <outlet property="txtRanking" destination="xN2-BW-tvX" id="mof-jD-l5f"/>
                         <outlet property="txtStartTime" destination="eXz-kK-rUJ" id="hFW-hk-x1W"/>
                         <outlet property="txtState" destination="2Kh-jO-fyI" id="GJA-L7-9hq"/>
+                        <segue destination="Vst-B1-DoA" kind="modal" identifier="OnRateSupplier" id="qbF-fi-ZIJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLJ-tu-Zpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2833,7 +2836,7 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fGq-b2-1Nm">
                                 <rect key="frame" x="150" y="346" width="20" height="20"/>
                             </activityIndicatorView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tu Servicio ha Cancelado!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="765-PE-Bn0">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tu Servicio ha sido Cancelado!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="765-PE-Bn0">
                                 <rect key="frame" x="12" y="195" width="296" height="29"/>
                                 <color key="backgroundColor" red="0.0" green="0.65490196079999996" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2847,7 +2850,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Ingrese codigo" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GlY-JR-dR2" customClass="MyUITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GlY-JR-dR2" customClass="MyUITextField">
                                 <rect key="frame" x="78" y="248" width="230" height="21"/>
                                 <color key="textColor" red="0.0" green="0.65490196079999996" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2871,26 +2874,25 @@
                                 <state key="normal" title="Enviar >">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Vst-B1-DoA" kind="modal" id="kCl-DA-Bro"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Wid-aR-7ml"/>
                     <connections>
+                        <outlet property="btnSubmitCancel" destination="G19-fH-Fhu" id="0aj-uz-wdS"/>
                         <outlet property="indicator" destination="fGq-b2-1Nm" id="3fB-WP-zRY"/>
                         <outlet property="txtDetails" destination="3Lk-UN-mRR" id="e9f-Ve-N8H"/>
                         <outlet property="txtReason" destination="GlY-JR-dR2" id="M5O-I2-96N"/>
                         <outlet property="txtState" destination="LxO-cv-Nl1" id="GyW-ic-EHv"/>
                         <outlet property="txtUserLastName" destination="wXd-3y-dAe" id="lRV-GD-kc9"/>
                         <outlet property="txtUserName" destination="m2L-VX-nfA" id="pqk-JB-yyG"/>
+                        <segue destination="Vst-B1-DoA" kind="modal" identifier="OnCanceledService" id="N6j-Ha-25g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3g3-bI-gXz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3744" y="-3828"/>
+            <point key="canvasLocation" x="3744" y="-3822"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BQo-X3-IGP">
@@ -3134,9 +3136,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="D8J-HL-GE4"/>
-        <segue reference="fBG-wL-bDp"/>
-        <segue reference="vjs-Zp-xLd"/>
+        <segue reference="uHb-zl-3a4"/>
+        <segue reference="N6j-Ha-25g"/>
+        <segue reference="nzV-VY-zeO"/>
         <segue reference="gYy-83-slm"/>
         <segue reference="R6n-7M-aYX"/>
         <segue reference="B0I-qk-ijs"/>
