@@ -21,6 +21,7 @@ namespace ClickNDone.Core
 		Task<List<ServicePrices>> GetServicePrices();
 		Task<bool> PostSuggestion(int userId, UserType userType, string message);
 		Task<bool> RateUser(int userId, string message, double rate, int id_order, UserType userType);
+		Task<bool> ChangePassword(int userId, string oldPass, UserType userType, string newPass);
 	}
 }
 

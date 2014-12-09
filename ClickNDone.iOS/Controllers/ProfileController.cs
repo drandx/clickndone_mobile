@@ -27,7 +27,37 @@ namespace ClickNDone.iOS
 			this.txtPassword.Text = user.password;
 			this.txtPhoneNumber.Text = user.mobile;
 			this.txtLastName.Text = user.surnames;
+
+			btnUpdate.TouchUpInside += async(sender, e) => {
+				try {
+					await UserModel.ChangePassword (UserModel.User.id, UserModel.UserType, UserModel.Password, txtPassword.Text);
+					new UIAlertView ("Felicitaciones!", "Se ha actualizado su password con exito", null, "Aceptar").Show ();
+				} catch (Exception exc) {
+					Console.WriteLine (exc.Message);
+				}
+			};
+
 		}
+
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(false);
+			UserModel.IsBusyChanged += OnIsBusyChanged;
+		}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(false);
+			UserModel.IsBusyChanged -= OnIsBusyChanged;
+		}
+
+
+		void OnIsBusyChanged(object sender, EventArgs e)
+		{
+			txtPassword.Enabled = 
+				indicator.Hidden = !UserModel.IsBusy;
+		}
+
 
 	}
 }

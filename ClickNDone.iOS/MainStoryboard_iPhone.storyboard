@@ -440,6 +440,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QgE-wd-Ams">
+                                <rect key="frame" x="150" y="401" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -447,6 +450,8 @@
                         <barButtonItem key="backBarButtonItem" title="Atras" id="3No-Kh-CZp"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnUpdate" destination="rUC-TQ-joc" id="NrK-Kz-xpJ"/>
+                        <outlet property="indicator" destination="QgE-wd-Ams" id="1a8-sq-Tqj"/>
                         <outlet property="txtEmail" destination="eNu-fn-Zve" id="l0m-Hp-4oH"/>
                         <outlet property="txtLastName" destination="go7-CX-DrR" id="7mI-6U-mPD"/>
                         <outlet property="txtName" destination="pCr-ml-2Xe" id="vIk-QF-kCI"/>
@@ -3200,12 +3205,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8j7-Fr-AT4"/>
-        <segue reference="yy3-70-ZTh"/>
-        <segue reference="bRd-fU-9Jr"/>
+        <segue reference="7RI-ya-a5E"/>
+        <segue reference="a8M-oX-YDi"/>
         <segue reference="uHb-zl-3a4"/>
-        <segue reference="aUQ-ng-MoQ"/>
         <segue reference="R6n-7M-aYX"/>
+        <segue reference="aUQ-ng-MoQ"/>
+        <segue reference="8j7-Fr-AT4"/>
         <segue reference="fBG-wL-bDp"/>
     </inferredMetricsTieBreakers>
 </document>

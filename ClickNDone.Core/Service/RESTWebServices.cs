@@ -576,6 +576,39 @@ namespace ClickNDone.Core
 
 		}
 
+
+		/**
+		 * 
+		 * 
+		 * 
+		 * */
+		public async Task<bool> ChangePassword(int userId, string oldPass, UserType userType, string newPass)
+		{
+			try {
+				client.Headers.Add (HttpRequestHeader.Accept, "application/json"); 
+				client.Headers.Add (HttpRequestHeader.ContentType, "application/json"); 
+				client.Headers.Set ("X-Origin-OS", "Iphone 7");
+				client.Headers.Set ("User-Agent", "IOS7");
+
+				string url = Constants.WebServiceHost + "changePassword";
+				IDictionary<String,Object> messageAttributes = new Dictionary<string, object> ();
+				messageAttributes.Add ("iduser", userId);
+				messageAttributes.Add ("pwd", oldPass);
+				messageAttributes.Add ("userType", userType.ToString());
+				messageAttributes.Add ("newpassword", newPass);
+
+				if (!client.IsBusy) {
+					var orderJson = JsonConvert.SerializeObject (messageAttributes);
+					await client.UploadStringTaskAsync (url, "POST", orderJson);
+					return true;
+				}
+				return true;
+			} catch (Exception exc) {
+				Console.WriteLine ("Crashing on ChangePassword - " + exc.Message);
+				return false;
+			}
+		}
+
 	}
 }
 
