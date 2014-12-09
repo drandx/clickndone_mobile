@@ -23,16 +23,6 @@ namespace ClickNDone.iOS
 		public async override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-
-			try {
-				if((!CategoriesModel.Loaded))
-				{
-					await categoriesModel.GetCategories ();
-					await categoriesModel.GetServicePrices(); 
-				}
-			} catch (Exception exc) {
-				Console.WriteLine ("Problems loading categories/ServicePrices " + exc.Message);
-			}
 			FlyoutNavigationController LateralBar = new FlyoutNavigationController();
 
 			if (loginViewModel.UserType.Equals(UserType.CONSUMER)) {
@@ -101,6 +91,20 @@ namespace ClickNDone.iOS
 		public override void ViewDidDisappear (bool animated)
 		{
 			base.ViewDidDisappear (animated);
+		}
+
+		public async override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+			try {
+				if((!CategoriesModel.Loaded))
+				{
+					await categoriesModel.GetCategories ();
+					await categoriesModel.GetServicePrices(); 
+				}
+			} catch (Exception exc) {
+				Console.WriteLine ("Problems loading categories/ServicePrices " + exc.Message);
+			}
 		}
 	}
 }
