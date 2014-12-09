@@ -11,7 +11,7 @@ namespace ClickNDone.iOS
 	public partial class SugerenciasController : MyViewController
 	{
 		readonly UserModel UserModel = (UserModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(UserModel));
-
+		readonly OrdersModel ordersModel = (OrdersModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(OrdersModel));
 
 		public SugerenciasController (IntPtr handle) : base (handle)
 		{
@@ -28,6 +28,7 @@ namespace ClickNDone.iOS
 
 			btnSendComment.TouchUpInside += (sender, e) => 
 			{
+				ordersModel.PostSuggestion(UserModel.User.id, UserModel.UserType, this.txtComments.Text);
 				new UIAlertView("Envío Exitioso", "Su sugerencia fue enviada con exito", null, "Ok").Show();
 				this.txtComments.Text = "";
 			};
