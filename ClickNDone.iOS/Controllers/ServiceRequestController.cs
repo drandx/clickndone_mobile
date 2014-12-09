@@ -31,6 +31,7 @@ namespace ClickNDone.iOS
 			catch (Exception exc)
 			{
 				new UIAlertView("Oops!", "Error solicitando servicio", null, "Ok").Show();
+				Console.WriteLine (exc.Message);
 			}
 
 		}

@@ -56,6 +56,8 @@ namespace ClickNDone.iOS
 						this.Storyboard.InstantiateViewController ("SupplierAgendaNavigation") as UIViewController,
 						this.Storyboard.InstantiateViewController ("HistorialControllerNavigation") as UIViewController,
 						this.Storyboard.InstantiateViewController ("SugerenciasController") as UIViewController,
+						this.Storyboard.InstantiateViewController ("LogoutController") as UIViewController,
+
 					}
 				};
 			}
@@ -78,6 +80,7 @@ namespace ClickNDone.iOS
 						this.Storyboard.InstantiateViewController ("SupplierAgendaNavigation") as UIViewController,
 						this.Storyboard.InstantiateViewController ("SugerenciasController") as UIViewController,
 						this.Storyboard.InstantiateViewController ("HistorialControllerNavigation") as UIViewController,
+						this.Storyboard.InstantiateViewController ("LogoutController") as UIViewController,
 					}
 				};
 
