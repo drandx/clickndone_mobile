@@ -33,11 +33,11 @@ namespace ClickNDone.iOS
 
 
 			if (userModel.UserType.Equals (UserType.CONSUMER)) {
-				lblUserType.Text = "Datos del Proveedor";
+				lblUserType.Text = " Datos del Proveedor";
 				txtLastName.Text = ordersModel.RequestedOrder.Supplier.surnames;
 				txtUserName.Text = ordersModel.RequestedOrder.Supplier.names;
 			} else {
-				lblUserType.Text = "Datos del Usuario";
+				lblUserType.Text = " Datos del Usuario";
 				txtLastName.Text = ordersModel.RequestedOrder.User.surnames;
 				txtUserName.Text = ordersModel.RequestedOrder.User.names;
 			}

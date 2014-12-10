@@ -391,6 +391,11 @@ namespace ClickNDone.Core
 				orderAttributes.Add ("UserID", userId);
 				List<Order> ordersList = new List<Order> ();
 
+				while(client.IsBusy)
+				{
+					Console.WriteLine(" *** Waiting until client is not busy");
+				}
+
 				if (!client.IsBusy) {
 					orderJson = JsonConvert.SerializeObject (orderAttributes);
 					var response = client.UploadString (url, "POST", orderJson);
@@ -431,6 +436,8 @@ namespace ClickNDone.Core
 						ordersList.Add (orderItem);
 					}
 				}
+				else
+					Console.WriteLine(" *** Warning HTTP Client is BUSY on GetOrdersList ***");
 				return ordersList;
 			} catch (Exception exc) {
 				Console.WriteLine ("Crashing on GetOrdersList - " + exc.Message + " "+orderJson);

@@ -99,6 +99,7 @@ namespace ClickNDone.iOS
 									ordersModel.RequestedOrder = ordersList.First();
 									this.BeginInvokeOnMainThread(() => {
 										LoadUIController();
+										TriggerLocalNotification();
 										UIApplication.SharedApplication.EndBackgroundTask(taskId);
 										taskId = 0;
 										running = false;
@@ -128,6 +129,17 @@ namespace ClickNDone.iOS
 			}
 		}
 
+
+		private void TriggerLocalNotification()
+		{
+			var notification = new UILocalNotification();
+			notification.FireDate = DateTime.Now.AddSeconds(1);
+			notification.AlertAction = "Servicio Solicitado";
+			notification.AlertBody = "Usted tiene una nueva consulta de servicio.";
+			notification.ApplicationIconBadgeNumber = 1;
+			notification.SoundName = UILocalNotification.DefaultSoundName;
+			UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+		}
 
 		private void LoadUIController()
 		{

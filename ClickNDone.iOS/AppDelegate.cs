@@ -37,7 +37,8 @@ namespace ClickNDone.iOS
 		public override void DidEnterBackground (UIApplication application)
 		{
 		}
-		
+
+
 		// This method is called as part of the transiton from background to active state.
 		public override void WillEnterForeground (UIApplication application)
 		{
@@ -67,8 +68,14 @@ namespace ClickNDone.iOS
 			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(OrdersModel),new OrdersModel());
 
 			//Push Notifications
-			//UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge;
-			//UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
+			UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge;
+			UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
+
+			//Local Notifications
+			if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
+				var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, new NSSet());
+				UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+			}
 
 			return true;
 
@@ -85,13 +92,22 @@ namespace ClickNDone.iOS
 			}
 			catch (Exception exc)
 			{
-				Console.WriteLine("*Error registering push: " + exc);
+				Console.WriteLine("***Error registering push: " + exc);
 			}
 		}
 
 		public override void FailedToRegisterForRemoteNotifications (UIApplication application , NSError error)
 		{
 			new UIAlertView("Error registering push notifications*", error.LocalizedDescription, null, "OK", null).Show();
+		}
+
+		public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+		{
+			// show an alert
+			new UIAlertView(notification.AlertAction, notification.AlertBody, null, "OK", null).Show();
+
+			// reset our badge
+			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 		}
 
 
