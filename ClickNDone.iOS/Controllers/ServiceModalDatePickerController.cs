@@ -110,16 +110,19 @@ namespace ClickNDone.iOS
 			btnRequestService.TouchUpInside += (sender, e) => {
 				ordersModel.MinCost = selectedFromMoney;
 				ordersModel.MaxCost = selectedToMoney;
+
 				DateTime finalDateTime = new DateTime ();
 				finalDateTime = this.selectedDate;
+
 				TimeSpan ts = new TimeSpan (this.selectedTime.Hour, this.selectedTime.Minute, this.selectedTime.Second);
 				finalDateTime = finalDateTime.Date + ts;
 				ordersModel.ReservationDate = finalDateTime;
+
+
 				ordersModel.Comments = txtComments.Text;
 				ordersModel.Location = txtAddress.Text;
 
-				if (string.IsNullOrEmpty (ordersModel.Location) || string.IsNullOrEmpty (ordersModel.Comments) || string.IsNullOrEmpty (ordersModel.MinCost.ToString ())
-				   || string.IsNullOrEmpty (ordersModel.MaxCost.ToString ()) || string.IsNullOrEmpty (ordersModel.ReservationDate.ToString ()))
+				if (string.IsNullOrEmpty (ordersModel.Location) || string.IsNullOrEmpty (ordersModel.Comments) || string.IsNullOrEmpty (selectedFromMoney) || string.IsNullOrEmpty (selectedToMoney) || (lblHour.Text == "Hora*"))
 					new UIAlertView ("Oops!", "Ingresa correctamente los campos", null, "Ok").Show ();
 				else
 					PerformSegue ("OnRequestService", this);
@@ -168,13 +171,34 @@ namespace ClickNDone.iOS
 			modalPicker.DatePicker.Locale = NSLocale.CurrentLocale;
 			modalPicker.DatePicker.TimeZone = NSTimeZone.LocalTimeZone;
 
+			NSDate date1 = new NSDate ();
+			NSCalendar greg = new NSCalendar (NSCalendarType.Gregorian);
+			NSDateComponents components = greg.Components (NSCalendarUnit.Calendar, date1);
+			components.Hour = 8;
+			components.Minute = 0;
+			components.Second = 0;
+			NSDate startDate = greg.DateFromComponents (components);
+
+			modalPicker.DatePicker.MinimumDate = startDate;
 
 			modalPicker.OnModalPickerDismissed += (s, ea) => {
 				var dateTime = DateTime.SpecifyKind (modalPicker.DatePicker.Date, DateTimeKind.Utc).ToLocalTime ();
-				lblHour.Text = dateTime.ToString ("hh");
-				lblMinute.Text = dateTime.Minute.ToString ();
-				lblAMPM.Text = dateTime.ToString ("tt");
-				this.selectedTime = dateTime;
+				bool validTime = true;
+
+				if(this.categoriesModel.SelectedSubcategory.ServiceScheule.Equals(ServiceSchedule.HALFDAY))
+				{
+					if((dateTime.Hour < 8) || (dateTime.Hour > 17)){
+						new UIAlertView ("Oops!", "El horario valido para este servicio es de 8:00AM hasta 5:00 PM", null, "Ok").Show ();
+						validTime = false;
+					}
+				}
+				if(validTime)
+				{
+					lblHour.Text = dateTime.ToString ("hh");
+					lblMinute.Text = dateTime.Minute.ToString ();
+					lblAMPM.Text = dateTime.ToString ("tt");
+					this.selectedTime = dateTime;
+				}
 
 			};
 

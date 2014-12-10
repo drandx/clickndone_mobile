@@ -60,7 +60,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="lQ9-uv-wPs">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="0bX-Zr-9E0"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="0bX-Zr-9E0"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnCustomer" destination="B9N-Jt-E7y" id="Wph-X2-O9n"/>
@@ -148,7 +148,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="d86-Pz-EFP">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="x8f-lr-oEA"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="x8f-lr-oEA"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnLogIn" destination="7UE-Z0-Y1N" id="uJ8-Z8-EE4"/>
@@ -309,7 +309,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="obk-P8-381">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="Bde-Ad-KXX"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="Bde-Ad-KXX"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnStartTaskt" destination="6ew-vu-V2f" id="u1f-Al-vbq"/>
@@ -447,7 +447,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="rI1-Dz-u1Y">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="3No-Kh-CZp"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="3No-Kh-CZp"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnUpdate" destination="rUC-TQ-joc" id="NrK-Kz-xpJ"/>
@@ -593,7 +593,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="02d-KX-aQf">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="MWE-1w-CNU"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="MWE-1w-CNU"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnClear" destination="Or8-X2-lZT" id="YCl-fz-L6G"/>
@@ -625,7 +625,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="4bL-4q-5ZY">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="4cH-8W-i3X"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="4cH-8W-i3X"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ko-jF-c8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -685,7 +685,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="QPK-Ng-ZSq">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="QEm-AX-Wj4"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="QEm-AX-Wj4"/>
                     </navigationItem>
                     <connections>
                         <outlet property="indicator" destination="nn4-gm-6cd" id="XIv-Yi-cNA"/>
@@ -765,7 +765,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Jfm-v5-MpK">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="dOJ-Bc-5C3"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="dOJ-Bc-5C3"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnBeauty" destination="MIF-2f-8oj" id="m9f-uW-rYD"/>
@@ -933,7 +933,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="aUc-54-eg1">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="ZBz-EC-LKX"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="ZBz-EC-LKX"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnRequestService" destination="jyC-i6-fhT" id="6WY-hj-0gF"/>
@@ -1004,7 +1004,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="vdZ-le-Nnm">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="UHW-1H-K7J"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="UHW-1H-K7J"/>
                     </navigationItem>
                     <connections>
                         <outlet property="imgCat" destination="avC-bj-tOp" id="91x-gn-KS9"/>
@@ -1197,7 +1197,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="R1s-xs-FHe">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="bnB-zt-f2T"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="bnB-zt-f2T"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnCancel" destination="L1I-ka-uTZ" id="LP3-6n-0pf"/>
@@ -1259,7 +1259,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="jlc-kv-TIk">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="xko-UM-akv"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="xko-UM-akv"/>
                     </navigationItem>
                     <connections>
                         <outlet property="ScrollerButtons" destination="1LW-DL-m1T" id="o1b-au-VL8"/>
@@ -1310,7 +1310,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="SdF-OK-dxW">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="cDG-Ba-Qd7"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="cDG-Ba-Qd7"/>
                     </navigationItem>
                     <connections>
                         <outlet property="ScrollerButtons" destination="mIe-8R-Czy" id="Eps-U2-rPG"/>
@@ -1453,7 +1453,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZVZ-Kp-hdn">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="dp2-xI-dng"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="dp2-xI-dng"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnCancelConfirm" destination="358-RN-Lqx" id="IKR-Ni-fr2"/>
@@ -1610,7 +1610,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="1RE-3k-Qcq">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="sMm-s8-4IR"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="sMm-s8-4IR"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnNoSubmit" destination="3a2-IB-Pgf" id="Cjy-2T-dc3"/>
@@ -1758,7 +1758,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Aeo-WH-5Z5">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="uV8-em-OR7"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="uV8-em-OR7"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnClean" destination="dt3-Ra-Ld6" id="5FZ-fo-MGW"/>
@@ -1906,7 +1906,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="3rx-5t-f8n">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="O3P-tI-cff"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="O3P-tI-cff"/>
                     </navigationItem>
                     <connections>
                         <outlet property="indicator" destination="5qK-hA-hyQ" id="xk7-Wy-Hfu"/>
@@ -2142,7 +2142,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="VND-FK-ktN">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="d0R-oK-G0d"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="d0R-oK-G0d"/>
                     </navigationItem>
                     <connections>
                         <outlet property="indicator" destination="LTA-3V-Vh3" id="Iya-Z7-uWQ"/>
@@ -2790,7 +2790,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Dq7-4N-msZ">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="m4V-1f-cSQ"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="m4V-1f-cSQ"/>
                     </navigationItem>
                     <connections>
                         <outlet property="indicator" destination="tA2-e1-SUb" id="HG0-xY-Ejz"/>
@@ -3028,7 +3028,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="vaK-Wg-E0a">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="I2e-p0-E5B"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="I2e-p0-E5B"/>
                     </navigationItem>
                     <connections>
                         <outlet property="indicator" destination="IJ6-9S-wTj" id="SDG-LU-9c3"/>
@@ -3158,7 +3158,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="2JA-ij-2PU">
-                        <barButtonItem key="backBarButtonItem" title="Atras" id="fMe-kk-Hug"/>
+                        <barButtonItem key="backBarButtonItem" title="Atrás" id="fMe-kk-Hug"/>
                     </navigationItem>
                     <connections>
                         <outlet property="imgCat" destination="Wa0-fs-h4b" id="JBB-4I-wqW"/>
