@@ -4,7 +4,9 @@ using System;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System.Drawing;
 using ClickNDone.Core;
+using PDRatingSample;
 
 namespace ClickNDone.iOS
 {
@@ -12,6 +14,9 @@ namespace ClickNDone.iOS
 	{
 		readonly OrdersModel ordersModel = (OrdersModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(OrdersModel));
 		readonly UserModel userModel = (UserModel)DependencyInjectionWrapper.Instance.ServiceContainer ().GetService (typeof(UserModel));
+
+		PDRatingView ratingView;
+		double rate = 0f;
 
 		public SupplierRateFinishedServiceController (IntPtr handle) : base (handle)
 		{
@@ -22,6 +27,40 @@ namespace ClickNDone.iOS
 			base.ViewDidLoad ();
 			this.NavigationItem.SetHidesBackButton (true, false);
 
+
+			//Rating control
+			var ratingConfig = new RatingConfig(emptyImage: UIImage.FromBundle("Stars/empty"),
+				filledImage: UIImage.FromBundle("Stars/filled"),
+				chosenImage: UIImage.FromBundle("Stars/chosen"));
+			// [Optional] Put a little space between the rating items.
+			ratingConfig.ItemPadding = 5f;
+			PointF starsPosition = new PointF ();
+			starsPosition.X = this.txtRanking.Frame.Location.X;
+			starsPosition.Y = this.txtRanking.Frame.Location.Y - 50f;
+			var ratingFrame = new RectangleF(starsPosition, new SizeF(txtRanking.Frame.Width * 1.5f, 125f));;
+
+			ratingView = new PDRatingView(ratingFrame, ratingConfig);
+
+			// [Optional] Set the current rating to display.
+			//decimal rating = 3.58m;
+			//decimal halfRoundedRating = Math.Round(rating * 2m, MidpointRounding.AwayFromZero) / 2m;
+			//decimal wholeRoundedRating = Math.Round(rating, MidpointRounding.AwayFromZero);
+			//ratingView.AverageRating = rating;
+			ratingView.ChosenRating = 1;
+
+			// [Optional] Make it read-only to keep the user from setting a rating.
+			//StarRating.UserInteractionEnabled = false;
+
+			// [Optional] Attach to the rating event to do something with the chosen value.
+			ratingView.RatingChosen += (sender, e) => {
+				//(new UIAlertView("Rated!", e.Rating.ToString() + " Stars", null, "Ok")).Show();
+				rate = Convert.ToDouble(e.Rating);
+			};
+			View.Add(ratingView);
+			//Rating control ends here
+
+
+
 			txtDate.Text = ordersModel.RequestedOrder.GetReservationDate();
 			txtState.Text = ordersModel.RequestedOrder.Status.ToString ();
 			txtClickCode.Text = ordersModel.RequestedOrder.ClickCode;
@@ -30,7 +69,7 @@ namespace ClickNDone.iOS
 
 			btnRate.TouchUpInside += async (sender, e) => 
 			{
-				await ordersModel.RateUser(userModel.User.id,this.txtComments.Text,Convert.ToDouble(this.txtRanking.Text),ordersModel.RequestedOrder.Id,userModel.User.userType);
+				await ordersModel.RateUser(userModel.User.id,this.txtComments.Text,rate,ordersModel.RequestedOrder.Id,userModel.User.userType);
 				PerformSegue("OnRateSupplier", this);
 			};
 
