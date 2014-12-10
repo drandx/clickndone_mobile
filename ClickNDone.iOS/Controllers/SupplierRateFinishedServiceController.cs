@@ -40,17 +40,9 @@ namespace ClickNDone.iOS
 			var ratingFrame = new RectangleF(starsPosition, new SizeF(txtRanking.Frame.Width * 1.5f, 125f));;
 
 			ratingView = new PDRatingView(ratingFrame, ratingConfig);
-
-			// [Optional] Set the current rating to display.
-			//decimal rating = 3.58m;
-			//decimal halfRoundedRating = Math.Round(rating * 2m, MidpointRounding.AwayFromZero) / 2m;
-			//decimal wholeRoundedRating = Math.Round(rating, MidpointRounding.AwayFromZero);
-			//ratingView.AverageRating = rating;
 			ratingView.ChosenRating = 1;
-
 			// [Optional] Make it read-only to keep the user from setting a rating.
 			//StarRating.UserInteractionEnabled = false;
-
 			// [Optional] Attach to the rating event to do something with the chosen value.
 			ratingView.RatingChosen += (sender, e) => {
 				//(new UIAlertView("Rated!", e.Rating.ToString() + " Stars", null, "Ok")).Show();
