@@ -47,6 +47,8 @@ namespace ClickNDone.Core
 		public string Convention { get; set; }
 		public List<Category> Subcategories { get; set; }
 		public string ImageName { get; set;}
+		public ServiceSchedule ServiceScheule { get; set; }
+
 	}
 
 	public class ServiceRequest

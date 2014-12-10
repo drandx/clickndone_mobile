@@ -20,7 +20,7 @@ namespace ClickNDone.iOS
 		{
 		}
 
-		public async override void ViewDidLoad ()
+		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 			FlyoutNavigationController LateralBar = new FlyoutNavigationController();

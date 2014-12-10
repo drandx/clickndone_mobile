@@ -22,6 +22,12 @@ namespace ClickNDone.Core
 		ORDEN_INICIADA=7
 	};
 
+	public enum ServiceSchedule 
+	{
+		WHOLEDAY=1, 
+		HALFDAY=2
+	};
+
 	public class Constants
 	{
 		public static int GET_ORDER_STATUS_WAIT_TIME = 10000; //Seconds

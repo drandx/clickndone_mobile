@@ -162,6 +162,8 @@ namespace ClickNDone.Core
 						var idSubCat = subcat ["id_sub"].ToString ();
 						subcategory.Id = idSubCat == "" || idSubCat == null ? 0 : Convert.ToInt32 (idSubCat);
 						subcategory.ParentId = category.Id;
+						var schedule = subcat ["schedule"].ToString ();
+						subcategory.ServiceScheule = schedule == null || schedule == "1" ? ServiceSchedule.WHOLEDAY : ServiceSchedule.HALFDAY; 
 
 						if((subcategory.Name != "" ) && (subcategory != null))
 							subCategories.Add (subcategory);
