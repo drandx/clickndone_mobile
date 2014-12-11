@@ -8,6 +8,8 @@ using System.ComponentModel.Design;
 using ClickNDone.Core;
 using FlyoutNavigation;
 using Parse;
+using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace ClickNDone.iOS
 {
@@ -22,7 +24,7 @@ namespace ClickNDone.iOS
 		{
 			// Initialize the Parse client with your Application ID and .NET Key found on
 			// your Parse dashboard
-			ParseClient.Initialize("Phwwy7aQcjd4eJgS5TZ3Q3NN8pr4tcJn5zp7snd7", "Y0obMKKkZBtBZFWnWYdMgOTwatRY7G2Zumui8S2q");
+			ParseClient.Initialize ("Phwwy7aQcjd4eJgS5TZ3Q3NN8pr4tcJn5zp7snd7", "Y0obMKKkZBtBZFWnWYdMgOTwatRY7G2Zumui8S2q");
 
 		}
 
@@ -33,7 +35,9 @@ namespace ClickNDone.iOS
 			set;
 		}
 
-		public static string _deviceToken="";
+		[JsonProperty (PropertyName = "DeviceToken")]
+		public string DeviceToken { get; set; }
+
 		private ISettings deviceSettinigs;
 		
 		// This method is invoked when the application is about to move from active to inactive state.
@@ -65,65 +69,74 @@ namespace ClickNDone.iOS
 			//Styles
 			Helper.setAppearances ();
 			deviceSettinigs = new IOSSettings ();
-			//TODO-temporary solution for debugging
-			deviceSettinigs.DeviceToken = _deviceToken;
 
 			//View Settings
-			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(ISettings),deviceSettinigs);
-			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(IWebService),new RESTWebServices());
+			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(ISettings), deviceSettinigs);
+			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(IWebService), new RESTWebServices ());
 
 			//ViewModels
-			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(UserModel),new UserModel());
-			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(TermsConditionsViewModel),new TermsConditionsViewModel());
-			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(CategoriesModel),new CategoriesModel());
-			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(OrdersModel),new OrdersModel());
+			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(UserModel), new UserModel ());
+			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(TermsConditionsViewModel), new TermsConditionsViewModel ());
+			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(CategoriesModel), new CategoriesModel ());
+			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(OrdersModel), new OrdersModel ());
 
-			//Extracode / Code IOS8n and later  / Same code line 91
-			UIUserNotificationType notificationTypesExtra = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound;
-			UIUserNotificationSettings sttingsExtra = UIUserNotificationSettings.GetSettingsForTypes (notificationTypesExtra, null);
-			UIApplication.SharedApplication.RegisterUserNotificationSettings(sttingsExtra);
+			// registers for push for iOS8
+			if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
+				var settings = UIUserNotificationSettings.GetSettingsForTypes (
+					               UIUserNotificationType.Alert
+					               | UIUserNotificationType.Badge
+					               | UIUserNotificationType.Sound, 
+					               new NSSet ());
 
-			//Push Notifications
-			UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge;
-			UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
-
-			//Local Notifications
-			//if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
-				//var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, new NSSet());
-				//UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-			//}
-
+				UIApplication.SharedApplication.RegisterUserNotificationSettings (settings); 
+				UIApplication.SharedApplication.RegisterForRemoteNotifications ();
+			} else {
+				//registers for push for iOS7 and older
+				UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge;
+				UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
+			}
 			return true;
 
 		}
 
 		public override void RegisteredForRemoteNotifications (UIApplication application, NSData deviceToken)
 		{
-			try
-			{
-				string token = deviceToken.Description;
-				token = token.Substring(1, token.Length - 2);
-				deviceSettinigs.DeviceToken = token;
-				_deviceToken = token;
-			}
-			catch (Exception exc)
-			{
-				Console.WriteLine("***Error registering push: " + exc);
+			try {
+
+				DeviceToken = deviceToken.Description;
+				DeviceToken = DeviceToken.Trim ('<', '>').Replace (" ", "");
+				deviceSettinigs.DeviceToken = DeviceToken;
+
+			} catch (Exception exc) {
+				Console.WriteLine ("***Error registering push: " + exc);
 			}
 		}
 
-		public override void FailedToRegisterForRemoteNotifications (UIApplication application , NSError error)
+		public override void FailedToRegisterForRemoteNotifications (UIApplication application, NSError error)
 		{
-			new UIAlertView("Error registering push notifications*", error.LocalizedDescription, null, "OK", null).Show();
+			new UIAlertView ("Error registering push notifications*", error.LocalizedDescription, null, "OK", null).Show ();
 		}
 
-		public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+		public override void ReceivedLocalNotification (UIApplication application, UILocalNotification notification)
 		{
 			// show an alert
-			new UIAlertView(notification.AlertAction, notification.AlertBody, null, "OK", null).Show();
+			new UIAlertView (notification.AlertAction, notification.AlertBody, null, "OK", null).Show ();
 
 			// reset our badge
 			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+		}
+
+		public override void ReceivedRemoteNotification (UIApplication application, NSDictionary userInfo)
+		{
+			Debug.WriteLine (userInfo.ToString ());
+			NSObject inAppMessage;
+
+			bool success = userInfo.TryGetValue (new NSString ("inAppMessage"), out inAppMessage);
+
+			if (success) {
+				var alert = new UIAlertView ("Got push notification", inAppMessage.ToString (), null, "OK", null);
+				alert.Show ();
+			}
 		}
 
 

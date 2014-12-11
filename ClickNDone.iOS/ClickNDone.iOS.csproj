@@ -46,7 +46,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer: Angela Chisaca (A4WS59L5P2)</CodesignKey>
+    <CodesignKey>iPhone Developer</CodesignKey>
     <BuildIpa>true</BuildIpa>
     <MtouchSdkVersion>8.1</MtouchSdkVersion>
     <IpaPackageName>
@@ -55,7 +55,7 @@
     </MtouchI18n>
     <MtouchArch>ARMv7</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>07e34fb2-cc09-4826-add0-9da536cdf3d8</CodesignProvision>
+    <CodesignProvision>41676922-7a91-4f0d-a770-77bc024cf6e2</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -108,9 +108,6 @@
     <Reference Include="SharpMobileCode.ModalPicker">
       <HintPath>..\ClickNDone.Core\Lib\SharpMobileCode.ModalPicker.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Components\json.net-4.5.11.1\lib\ios\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="FlyoutNavigation">
       <HintPath>..\Components\flyoutnavigation-1.3\lib\ios\FlyoutNavigation.dll</HintPath>
     </Reference>
@@ -119,6 +116,21 @@
     </Reference>
     <Reference Include="Parse.iOS">
       <HintPath>Libs\Parse.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.Ext">
+      <HintPath>..\Components\azure-mobile-services-1.3.0\lib\ios\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile">
+      <HintPath>..\Components\azure-mobile-services-1.3.0\lib\ios\Microsoft.WindowsAzure.Mobile.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\Components\azure-mobile-services-1.3.0\lib\ios\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\Components\azure-mobile-services-1.3.0\lib\ios\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Components\azure-mobile-services-1.3.0\lib\ios\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +192,8 @@
     <BundleResource Include="Resources\Stars\chosen.png" />
     <BundleResource Include="Resources\Stars\empty.png" />
     <BundleResource Include="Resources\Stars\filled.png" />
+    <BundleResource Include="Resources\Default%402x.png" />
+    <BundleResource Include="Resources\Default.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -345,12 +359,12 @@
     <Compile Include="Controllers\SupplierStartedServiceController.designer.cs">
       <DependentUpon>SupplierStartedServiceController.cs</DependentUpon>
     </Compile>
-    <Compile Include="FinishedServiceDetailController.cs" />
-    <Compile Include="FinishedServiceDetailController.designer.cs">
+    <Compile Include="Controllers\FinishedServiceDetailController.cs" />
+    <Compile Include="Controllers\FinishedServiceDetailController.designer.cs">
       <DependentUpon>FinishedServiceDetailController.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogoutController.cs" />
-    <Compile Include="LogoutController.designer.cs">
+    <Compile Include="Controllers\LogoutController.cs" />
+    <Compile Include="Controllers\LogoutController.designer.cs">
       <DependentUpon>LogoutController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -365,8 +379,8 @@
       <Version>1.3</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
-    <XamarinComponentReference Include="json.net">
-      <Version>4.5.11.1</Version>
+    <XamarinComponentReference Include="azure-mobile-services">
+      <Version>1.3.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
