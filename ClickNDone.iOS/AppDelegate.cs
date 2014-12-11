@@ -7,6 +7,7 @@ using MonoTouch.UIKit;
 using System.ComponentModel.Design;
 using ClickNDone.Core;
 using FlyoutNavigation;
+using Parse;
 
 namespace ClickNDone.iOS
 {
@@ -16,13 +17,23 @@ namespace ClickNDone.iOS
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : UIApplicationDelegate
 	{
+
+		public AppDelegate ()
+		{
+			// Initialize the Parse client with your Application ID and .NET Key found on
+			// your Parse dashboard
+			ParseClient.Initialize("Phwwy7aQcjd4eJgS5TZ3Q3NN8pr4tcJn5zp7snd7", "Y0obMKKkZBtBZFWnWYdMgOTwatRY7G2Zumui8S2q");
+
+		}
+
+
 		// class-level declarations
 		public override UIWindow Window {
 			get;
 			set;
 		}
 
-		public static string _deviceToken="ggggg";
+		public static string _deviceToken="";
 		private ISettings deviceSettinigs;
 		
 		// This method is invoked when the application is about to move from active to inactive state.
@@ -67,15 +78,20 @@ namespace ClickNDone.iOS
 			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(CategoriesModel),new CategoriesModel());
 			DependencyInjectionWrapper.Instance.ServiceContainer ().AddService (typeof(OrdersModel),new OrdersModel());
 
+			//Extracode / Code IOS8n and later  / Same code line 91
+			UIUserNotificationType notificationTypesExtra = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound;
+			UIUserNotificationSettings sttingsExtra = UIUserNotificationSettings.GetSettingsForTypes (notificationTypesExtra, null);
+			UIApplication.SharedApplication.RegisterUserNotificationSettings(sttingsExtra);
+
 			//Push Notifications
 			UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge;
 			UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
 
 			//Local Notifications
-			if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
-				var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, new NSSet());
-				UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-			}
+			//if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
+				//var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, new NSSet());
+				//UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+			//}
 
 			return true;
 
