@@ -207,10 +207,7 @@ namespace ClickNDone.iOS
 			Console.WriteLine ("**Toggle Pressed");
 		}
 
-		public override async void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
-		{
 
-		}
 
 
 	}

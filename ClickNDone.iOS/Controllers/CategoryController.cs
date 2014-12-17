@@ -27,6 +27,11 @@ namespace ClickNDone.iOS
 
 		void btnTouchDownHandler (Object sender, EventArgs args)
 		{
+			//TODO - Issue when Categories are not loaded and Category buttin is pressed.
+			while(categoriesModel.Categories == null){
+				Console.WriteLine ("..Loading categories...");
+			}
+
 			UIButton pressedButton = (UIButton)sender;
 			Category selectedCat = new Category();
 			if (pressedButton.Tag == 0) 
