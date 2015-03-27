@@ -129,9 +129,6 @@
     <Reference Include="ModernHttpClient">
       <HintPath>..\Components\modernhttpclient-2.1.4\lib\ios\ModernHttpClient.dll</HintPath>
     </Reference>
-    <Reference Include="FlyoutNavigation">
-      <HintPath>..\Components\flyoutnavigation-1.3\lib\ios\FlyoutNavigation.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.Ext">
       <HintPath>..\Components\azure-mobile-services-1.3.0\lib\ios\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
     </Reference>
@@ -149,6 +146,9 @@
     </Reference>
     <Reference Include="RestSharp.MonoTouch">
       <HintPath>..\Components\restsharp-104.4.0.1\lib\ios\RestSharp.MonoTouch.dll</HintPath>
+    </Reference>
+    <Reference Include="FlyoutNavigation">
+      <HintPath>..\Components\flyoutnavigation-1.3\lib\ios\FlyoutNavigation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
